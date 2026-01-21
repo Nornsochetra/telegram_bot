@@ -1,8 +1,6 @@
 import requests
 from time import sleep
 
-token = "8530640577:AAF1ZFTaeBTG3bxdTb9jLobJuCuH2kAflGM"
-
 # testing token is it work or not
 # url = f"https://api.telegram.org/bot{token}/getMe"
 #
