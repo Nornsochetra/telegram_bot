@@ -1,35 +1,29 @@
-import requests
-from time import sleep
+from su25_tg_nofify import TelegramNotifier
 
-# testing token is it work or not
-# url = f"https://api.telegram.org/bot{token}/getMe"
-#
-# headers = {
-#     "accept": "application/json",
-#     "User-Agent": "Telegram Bot SDK - (https://github.com/irazasyed/telegram-bot-sdk)"
-# }
-#
-# response = requests.post(url, headers=headers)
-#
-# print(response.text)
+notifier = TelegramNotifier(token, chat_id)
 
-# send notification
-url = f"https://api.telegram.org/bot{token}/sendMessage"
+# Get me
+notifier.get_me()
 
-payload = {
-    "text": "hello world my name is chetra", # text we want to see
-    "parse_mode": "HTML", # format text
-    "disable_web_page_preview": False,
-    "disable_notification": False,
-    "chat_id": "@su25_notification_testing" # username group
-}
-headers = {
-    "accept": "application/json",
-    "User-Agent": "so chetraa",
-    "content-type": "application/json"
-}
+# Send message
+message = """
+<b>📦 New Order</b>
+<pre>
+Customer: John Doe
+Order ID: 1024
+Total: $25.00
+</pre>
+"""
+notifier.send_message(message)
 
-for response in range(100):
-    response = requests.post(url, json=payload, headers=headers)
-    print(response.text)
-    sleep(3)
+# Send photo
+notifier.send_photo(
+    "https://i.pinimg.com/1200x/80/27/c6/8027c6c615900bf009b322294b61fcb2.jpg",
+    caption="this is chhing chang",
+)
+
+# Send document
+notifier.send_document(
+    "https://pdfobject.com/pdf/sample.pdf",
+    caption="this is an example about this project",
+)
